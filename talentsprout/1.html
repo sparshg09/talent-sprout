@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TalentSprout</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#020617;color:white;}
+
+/* NAVBAR */
+nav{
+  display:flex;
+  justify-content:space-between;
+  padding:20px 8%;
+}
+.logo{font-size:26px;font-weight:700;color:#22c55e;}
+nav button{
+  background:#22c55e;
+  border:none;
+  padding:10px 20px;
+  border-radius:10px;
+  color:white;
+  cursor:pointer;
+}
+
+/* HERO */
+.hero{text-align:center;padding:100px 10%;}
+.hero h1{font-size:48px;margin-bottom:10px;}
+.hero span{color:#22c55e;}
+.cta{
+  background:#22c55e;
+  padding:14px 30px;
+  border:none;
+  border-radius:12px;
+  color:white;
+  cursor:pointer;
+  margin-top:20px;
+}
+
+/* POPUP BACKGROUND */
+.popup{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.7);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+
+/* POPUP BOX */
+.popup-content{
+  background:#0f172a;
+  padding:30px;
+  border-radius:16px;
+  width:320px;
+  text-align:center;
+}
+
+.popup-content h2{
+  margin-bottom:15px;
+  color:#22c55e;
+}
+
+.popup-content input{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:8px;
+  border:none;
+}
+
+.popup-content button{
+  background:#22c55e;
+  border:none;
+  padding:10px;
+  border-radius:8px;
+  width:100%;
+  color:white;
+  margin-top:10px;
+  cursor:pointer;
+}
+
+.close{
+  position:absolute;
+  top:20px;
+  right:30px;
+  font-size:24px;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="logo">TalentSprout</div>
+  <button onclick="openPopup()">Login / Join</button>
+</nav>
+
+<section class="hero">
+  <h1>Student Skills → <span>Real Income</span></h1>
+  <p>Connect. Create. Grow.</p>
+  <button class="cta" onclick="openPopup()">Start Earning</button>
+</section>
+
+<!-- POPUP FORM -->
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup()">✖</span>
+    <h2>Join TalentSprout</h2>
+
+    <input type="text" placeholder="Full Name">
+    <input type="email" placeholder="Email">
+    <input type="text" placeholder="College / School">
+    <input type="text" placeholder="Skills (e.g. Design, Coding)">
+    <input type="password" placeholder="Create Password">
+
+    <button onclick="submitForm()">Create Account</button>
+  </div>
+</div>
+
+<script>
+function openPopup(){
+  document.getElementById("popup").style.display = "flex";
+}
+
+function closePopup(){
+  document.getElementById("popup").style.display = "none";
+}
+
+function submitForm(){
+  alert("Account created! Welcome to TalentSprout 🚀");
+  closePopup();
+}
+</script>
+
+</body>
+</html>

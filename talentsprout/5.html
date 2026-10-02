@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TalentSprout</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#020617;color:white;}
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 60px;border-bottom:1px solid #1e293b;}
+.logo{display:flex;align-items:center;gap:10px;font-size:24px;font-weight:700;color:#22c55e;}
+.logo img{width:42px;height:42px;border-radius:50%;}
+nav button{background:#22c55e;border:none;padding:10px 20px;border-radius:8px;color:white;cursor:pointer;}
+.hero{height:90vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(to bottom,#0f172a,#020617);padding:20px;}
+.hero img{width:130px;margin-bottom:20px;}
+.hero h1{font-size:52px;margin-bottom:15px;}
+.hero p{color:#94a3b8;font-size:18px;margin-bottom:25px;max-width:600px;}
+.hero button{background:#22c55e;border:none;padding:14px 28px;border-radius:10px;color:white;font-size:16px;cursor:pointer;}
+.section{padding:80px 20px;text-align:center;}
+.section h2{color:#22c55e;margin-bottom:40px;font-size:34px;}
+.features{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;}
+.feature{background:#0f172a;padding:30px;border-radius:14px;width:240px;}
+.feature img{width:80px;margin-bottom:15px;}
+.popup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:flex;justify-content:center;align-items:center;z-index:100;}
+.hidden{display:none;}
+.container{width:420px;background:#0f172a;padding:30px;border-radius:16px;text-align:center;overflow-y:auto;max-height:90%;}
+input, select{width:100%;padding:10px;margin:8px 0;border-radius:8px;border:none;}
+button.full{background:#22c55e;border:none;padding:12px;width:100%;border-radius:10px;color:white;font-weight:600;cursor:pointer;margin-top:10px;}
+.page{padding:40px;display:none;}
+.back-btn{margin-bottom:20px;background:#334155;border:none;padding:8px 16px;border-radius:8px;color:white;cursor:pointer;}
+.project-group{margin-top:30px;}
+.project-grid{display:flex;flex-wrap:wrap;gap:20px;}
+.project-card{background:#0f172a;border-radius:14px;width:260px;overflow:hidden;cursor:pointer;transition:0.2s;}
+.project-card:hover{transform:translateY(-5px);}
+.project-card img{width:100%;height:150px;object-fit:cover;}
+.project-card div{padding:15px;}
+.apply-btn{background:#22c55e;border:none;padding:10px 20px;border-radius:8px;color:white;margin-top:15px;cursor:pointer;}
+.applicant-item {background:#1e293b; padding:10px; margin:10px 0; border-radius:8px; text-align:left;}
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="logo">
+<img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+TalentSprout
+</div>
+<button onclick="openLogin()">Login</button>
+</nav>
+
+<div id="homePage">
+<div class="hero">
+<img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png">
+<h1>Turn Skills Into Income</h1>
+<p>Earn • Upskill • Get Certified • Build Connections</p>
+<button onclick="openLogin()">Start Now</button>
+</div>
+
+<div class="section">
+<h2>What You Get</h2>
+<div class="features">
+<div class="feature"><img src="https://cdn-icons-png.flaticon.com/512/3135/3135679.png"><h3>You Earn</h3></div>
+<div class="feature"><img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png"><h3>You Upskill</h3></div>
+<div class="feature"><img src="https://cdn-icons-png.flaticon.com/512/190/190411.png"><h3>Certificate</h3></div>
+<div class="feature"><img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png"><h3>Connections</h3></div>
+</div>
+</div>
+</div>
+
+<div id="loginPopup" class="popup hidden">
+<div class="container">
+<div id="roleSelect">
+<h2>Login</h2>
+<button class="full" onclick="showTalentLogin()">Login as Talent</button>
+<button class="full" onclick="showBusinessLogin()">Login as Business</button>
+<button class="full" onclick="closeLogin()">Close</button>
+</div>
+
+<div id="talentStep1" class="hidden">
+<h2>Talent Registration</h2>
+<input id="tName" placeholder="Full Name">
+<input type="date">
+<input placeholder="School / College">
+<input id="tCity" placeholder="City">
+<input placeholder="State">
+<input placeholder="Country">
+<input placeholder="LinkedIn (optional)">
+<input id="tEmail" type="email" placeholder="Gmail">
+<input id="tMobile" placeholder="Mobile Number">
+<button class="full" onclick="showTalentStep2()">Continue</button>
+</div>
+
+<div id="talentStep2" class="hidden">
+<h2>Your Skills</h2>
+<select id="tSkillLevel"><option>Skill Level</option><option>Skilled</option><option>Unskilled</option></select>
+<input id="tSkillsInput" placeholder="What skills do you have?">
+<input type="number" placeholder="Prior Experience (months)">
+<input placeholder="Area of Interest">
+<select><option>Hours per day</option><option>2 hrs</option><option>4 hrs</option><option>6 hrs</option><option>8 hrs</option></select>
+<button class="full" onclick="enterMarketplace()">Submit</button>
+</div>
+
+<div id="businessStep1" class="hidden">
+<h2>Business Registration</h2>
+<input id="bName" placeholder="Business Name">
+<input placeholder="Industry">
+<input id="bCity" placeholder="City">
+<input placeholder="State">
+<input placeholder="Country">
+<input id="bEmail" type="email" placeholder="Business Email">
+<input id="bMobile" placeholder="Contact Number">
+<button class="full" onclick="showBusinessStep2()">Continue</button>
+</div>
+
+<div id="businessStep2" class="hidden">
+<h2>Project Details</h2>
+<input id="pTitle" placeholder="Project Title">
+<input id="pSkills" placeholder="Required Skills">
+<input type="date" id="pDeadline">
+<input id="pBudget" placeholder="Budget Offered">
+<input placeholder="Experience Required">
+<button class="full" onclick="postProject()">Post Project</button>
+</div>
+</div>
+</div>
+
+<div id="marketplace" class="page">
+<button class="back-btn" onclick="goHome()">← Home</button>
+<h2>Available Projects</h2>
+<div id="projectsContainer"></div>
+</div>
+
+<div id="projectDetails" class="page">
+<button class="back-btn" onclick="backToProjects()">← Back</button>
+<h2 id="detailTitle"></h2>
+<img id="detailImage" style="width:320px;border-radius:12px;margin:20px 0;">
+<p id="detailDesc"></p>
+<p id="detailFull"></p>
+<p id="detailDeadline"></p>
+<p id="detailExperience"></p>
+<p id="detailAge"></p>
+<p id="detailBudget"></p>
+<button class="apply-btn" onclick="applyToCurrentProject()">Apply</button>
+</div>
+
+<div id="profilePage" class="page">
+<button class="back-btn" onclick="goHome()">← Home</button>
+<h2 id="profileName"></h2>
+<p><strong>Email:</strong> <span id="profileEmail"></span></p>
+<p><strong>Mobile:</strong> <span id="profileMobile"></span></p>
+<p><strong>City:</strong> <span id="profileCity"></span></p>
+
+<div id="talentSection">
+    <h3>Projects Applied For</h3>
+    <ul id="profileApplied"></ul>
+    <h3>Money Earned</h3>
+    <p id="profileEarnings">₹0</p>
+</div>
+
+<div id="businessSection" class="hidden">
+    <h3>Your Posted Projects</h3>
+    <div id="myProjectsList"></div>
+    <div id="applicantReview" class="hidden" style="margin-top:20px; border-top:1px solid #22c55e; padding-top:20px;">
+        <h3>Applicants for <span id="reviewProjTitle"></span></h3>
+        <div id="applicantsListContainer"></div>
+    </div>
+</div>
+</div>
+
+<script>
+// Global variables
+let currentUser = null;
+let currentProjectViewed = null;
+
+// Original Projects Data
+const projects = {
+"Design":[
+{title:"Logo Design for Startup",desc:"Create brand identity for food startup",details:"Brand: GreenBite. Colors: Green + White. Style: Minimal modern.",deadline:"10 Days",experience:"Beginner–Intermediate",age:"16+",budget:"₹5000",img:"https://images.unsplash.com/photo-1600585154340-be6161a56a0", applicants:[]},
+{title:"Instagram Post Designer",desc:"Design 10 promotional posts",details:"Brand: UrbanWear. Colors: Black, White, Red.",deadline:"7 Days",experience:"Beginner",age:"15+",budget:"₹3000",img:"https://images.unsplash.com/photo-1611162618071-b39a2ec055fb", applicants:[]}
+],
+"Programming":[
+{title:"Website Bug Fix",desc:"Fix frontend issues",details:"Fix navbar overlap, improve mobile layout.",deadline:"5 Days",experience:"Intermediate",age:"16+",budget:"₹4000",img:"https://images.unsplash.com/photo-1519389950473-47ba0277781c", applicants:[]}
+]
+};
+
+function openLogin() { loginPopup.classList.remove("hidden"); hideAll(); document.getElementById("roleSelect").classList.remove("hidden"); }
+function closeLogin() { loginPopup.classList.add("hidden"); }
+function hideAll() { document.querySelectorAll(".container > div").forEach(el=>el.classList.add("hidden")); }
+
+function showTalentLogin(){hideAll(); talentStep1.classList.remove("hidden");}
+function showTalentStep2(){
+    currentUser = {
+        role: 'talent',
+        name: document.getElementById("tName").value,
+        email: document.getElementById("tEmail").value,
+        mobile: document.getElementById("tMobile").value,
+        city: document.getElementById("tCity").value,
+        projectsApplied: []
+    };
+    hideAll(); talentStep2.classList.remove("hidden");
+}
+
+function showBusinessLogin(){hideAll(); businessStep1.classList.remove("hidden");}
+function showBusinessStep2(){
+    currentUser = {
+        role: 'business',
+        name: document.getElementById("bName").value,
+        email: document.getElementById("bEmail").value,
+        mobile: document.getElementById("bMobile").value,
+        city: document.getElementById("bCity").value,
+        myProjects: []
+    };
+    hideAll(); businessStep2.classList.remove("hidden");
+}
+
+function postProject() {
+    const newProj = {
+        title: document.getElementById("pTitle").value,
+        desc: "Business Posted Project",
+        details: "Required Skills: " + document.getElementById("pSkills").value,
+        deadline: document.getElementById("pDeadline").value,
+        budget: document.getElementById("pBudget").value,
+        img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
+        applicants: []
+    };
+    if(!projects["Business Posts"]) projects["Business Posts"] = [];
+    projects["Business Posts"].push(newProj);
+    currentUser.myProjects.push(newProj);
+    alert('Project Posted!');
+    enterMarketplace();
+}
+
+function enterMarketplace(){
+    if(currentUser.role === 'talent') {
+        currentUser.skillsList = document.getElementById("tSkillsInput").value;
+    }
+    closeLogin();
+    homePage.style.display="none";
+    marketplace.style.display="block";
+    loadProjects();
+    updateNavProfile();
+}
+
+function loadProjects(){
+    let container=document.getElementById("projectsContainer");
+    container.innerHTML="";
+    for(let skill in projects){
+        let group=document.createElement("div");
+        group.className="project-group";
+        group.innerHTML="<h3>"+skill+"</h3>";
+        let grid=document.createElement("div");
+        grid.className="project-grid";
+        projects[skill].forEach(p=>{
+            let card=document.createElement("div");
+            card.className="project-card";
+            card.innerHTML="<img src='"+p.img+"'><div><strong>"+p.title+"</strong><br>"+p.budget+"</div>";
+            card.onclick=()=>showDetails(p);
+            grid.appendChild(card);
+        });
+        group.appendChild(grid);
+        container.appendChild(group);
+    }
+}
+
+function showDetails(project){
+    currentProjectViewed = project;
+    marketplace.style.display="none";
+    projectDetails.style.display="block";
+    detailTitle.innerText=project.title;
+    detailDesc.innerText=project.desc;
+    detailFull.innerText="Project Details: "+project.details;
+    detailDeadline.innerText="Deadline: "+project.deadline;
+    detailBudget.innerText="Budget: "+project.budget;
+    detailImage.src=project.img;
+}
+
+function applyToCurrentProject() {
+    if(currentUser && currentUser.role === 'talent') {
+        currentProjectViewed.applicants.push(currentUser);
+        currentUser.projectsApplied.push(currentProjectViewed.title);
+        alert("You applied for " + currentProjectViewed.title);
+    } else { alert("Only Talents can apply!"); }
+}
+
+function showProfile(){
+    homePage.style.display="none"; marketplace.style.display="none"; projectDetails.style.display="none"; profilePage.style.display="block";
+    document.getElementById("profileName").innerText = currentUser.name;
+    document.getElementById("profileEmail").innerText = currentUser.email;
+    document.getElementById("profileMobile").innerText = currentUser.mobile;
+    document.getElementById("profileCity").innerText = currentUser.city;
+
+    if(currentUser.role === 'talent') {
+        document.getElementById("talentSection").classList.remove("hidden");
+        document.getElementById("businessSection").classList.add("hidden");
+        populateList("profileApplied", currentUser.projectsApplied);
+    } else {
+        document.getElementById("businessSection").classList.remove("hidden");
+        document.getElementById("talentSection").classList.add("hidden");
+        renderBusinessProjects();
+    }
+}
+
+function renderBusinessProjects() {
+    const container = document.getElementById("myProjectsList");
+    container.innerHTML = "";
+    currentUser.myProjects.forEach((proj, index) => {
+        let div = document.createElement("div");
+        div.className = "project-card";
+        div.style.width = "100%";
+        div.style.marginBottom = "10px";
+        div.innerHTML = `<div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong>${proj.title}</strong>
+            <button class="apply-btn" onclick="viewApplicants(${index})">View Applicants (${proj.applicants.length})</button>
+        </div>`;
+        container.appendChild(div);
+    });
+}
+
+function viewApplicants(index) {
+    const proj = currentUser.myProjects[index];
+    document.getElementById("applicantReview").classList.remove("hidden");
+    document.getElementById("reviewProjTitle").innerText = proj.title;
+    const list = document.getElementById("applicantsListContainer");
+    list.innerHTML = "";
+    proj.applicants.forEach(app => {
+        let div = document.createElement("div");
+        div.className = "applicant-item";
+        div.innerHTML = `<strong>${app.name}</strong><br>Skills: ${app.skillsList}<br>
+        <button class="apply-btn" onclick="alert('Project given to ${app.name}')">Give Project</button>`;
+        list.appendChild(div);
+    });
+}
+
+function populateList(id, items){
+    const ul = document.getElementById(id);
+    ul.innerHTML="";
+    if(items.length===0){ ul.innerHTML="<li>None</li>"; }
+    else { items.forEach(item=>{ const li=document.createElement("li"); li.innerText=item; ul.appendChild(li); }); }
+}
+
+function updateNavProfile(){
+    const navButton = document.querySelector("nav button");
+    navButton.innerText = "Profile";
+    navButton.onclick = showProfile;
+}
+
+function goHome(){ marketplace.style.display="none"; projectDetails.style.display="none"; profilePage.style.display="none"; homePage.style.display="block"; }
+function backToProjects(){ projectDetails.style.display="none"; marketplace.style.display="block"; }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TalentSprout</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#020617;color:white;}
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 60px;border-bottom:1px solid #1e293b;}
+.logo{display:flex;align-items:center;gap:10px;font-size:24px;font-weight:700;color:#22c55e;}
+.logo img{width:42px;height:42px;border-radius:50%;}
+nav button{background:#22c55e;border:none;padding:10px 20px;border-radius:8px;color:white;cursor:pointer;}
+.hero{height:90vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(to bottom,#0f172a,#020617);padding:20px;}
+.hero img{width:130px;margin-bottom:20px;}
+.hero h1{font-size:52px;margin-bottom:15px;}
+.hero p{color:#94a3b8;font-size:18px;margin-bottom:25px;max-width:600px;}
+.hero button{background:#22c55e;border:none;padding:14px 28px;border-radius:10px;color:white;font-size:16px;cursor:pointer;}
+.section{padding:80px 20px;text-align:center;}
+.section h2{color:#22c55e;margin-bottom:40px;font-size:34px;}
+.features{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;}
+.feature{background:#0f172a;padding:30px;border-radius:14px;width:240px;}
+.feature img{width:80px;margin-bottom:15px;}
+.popup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:flex;justify-content:center;align-items:center;}
+.hidden{display:none;}
+.container{width:420px;background:#0f172a;padding:30px;border-radius:16px;text-align:center;}
+input, select{width:100%;padding:10px;margin:8px 0;border-radius:8px;border:none;}
+button.full{background:#22c55e;border:none;padding:12px;width:100%;border-radius:10px;color:white;font-weight:600;cursor:pointer;margin-top:10px;}
+.page{padding:40px;display:none;}
+.back-btn{margin-bottom:20px;background:#334155;border:none;padding:8px 16px;border-radius:8px;color:white;cursor:pointer;}
+.project-group{margin-top:30px;}
+.project-grid{display:flex;flex-wrap:wrap;gap:20px;}
+.project-card{background:#0f172a;border-radius:14px;width:260px;overflow:hidden;cursor:pointer;transition:0.2s;}
+.project-card:hover{transform:translateY(-5px);}
+.project-card img{width:100%;height:150px;object-fit:cover;}
+.project-card div{padding:15px;}
+.apply-btn{background:#22c55e;border:none;padding:10px 20px;border-radius:8px;color:white;margin-top:15px;}
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="logo">
+<img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+TalentSprout
+</div>
+<button onclick="openLogin()">Login</button>
+</nav>
+
+<div id="homePage">
+<div class="hero">
+<img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png">
+<h1>Turn Skills Into Income</h1>
+<p>Earn • Upskill • Get Certified • Build Connections</p>
+<button onclick="openLogin()">Start Now</button>
+</div>
+
+<div class="section">
+<h2>What You Get</h2>
+<div class="features">
+<div class="feature"><img src="https://cdn-icons-png.flaticon.com/512/3135/3135679.png"><h3>You Earn</h3></div>
+<div class="feature"><img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png"><h3>You Upskill</h3></div>
+<div class="feature"><img src="https://cdn-icons-png.flaticon.com/512/190/190411.png"><h3>Certificate</h3></div>
+<div class="feature"><img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png"><h3>Connections</h3></div>
+</div>
+</div>
+</div>
+
+<div id="loginPopup" class="popup hidden">
+<div class="container">
+<div id="roleSelect">
+<h2>Login</h2>
+<button class="full" onclick="showTalentLogin()">Login as Talent</button>
+<button class="full" onclick="showBusinessLogin()">Login as Business</button>
+<button class="full" onclick="closeLogin()">Close</button>
+</div>
+
+<div id="talentStep1" class="hidden">
+<h2>Talent Registration</h2>
+<input placeholder="Full Name">
+<input type="date">
+<input placeholder="School / College">
+<input placeholder="City">
+<input placeholder="State">
+<input placeholder="Country">
+<input placeholder="LinkedIn (optional)">
+<input type="email" placeholder="Gmail">
+<input placeholder="Mobile Number">
+<button class="full" onclick="showTalentStep2()">Continue</button>
+</div>
+
+<div id="talentStep2" class="hidden">
+<h2>Your Skills</h2>
+<select><option>Skill Level</option><option>Skilled</option><option>Unskilled</option></select>
+<input placeholder="What skills do you have?">
+<input type="number" placeholder="Prior Experience (months)">
+<input placeholder="Area of Interest">
+<select><option>Hours per day</option><option>2 hrs</option><option>4 hrs</option><option>6 hrs</option><option>8 hrs</option></select>
+<button class="full" onclick="enterMarketplace()">Submit</button>
+</div>
+
+<div id="businessStep1" class="hidden">
+<h2>Business Registration</h2>
+<input placeholder="Business Name">
+<input placeholder="Industry">
+<input placeholder="City">
+<input placeholder="State">
+<input placeholder="Country">
+<input type="email" placeholder="Business Email">
+<input placeholder="Contact Number">
+<button class="full" onclick="showBusinessStep2()">Continue</button>
+</div>
+
+<div id="businessStep2" class="hidden">
+<h2>Project Details</h2>
+<input placeholder="Project Title">
+<input placeholder="Required Skills">
+<input type="date">
+<input placeholder="Budget Offered">
+<input placeholder="Experience Required">
+<button class="full" onclick="alert('Project Posted!')">Post Project</button>
+</div>
+</div>
+</div>
+
+<div id="marketplace" class="page">
+<button class="back-btn" onclick="goHome()">← Home</button>
+<h2>Available Projects</h2>
+<div id="projectsContainer"></div>
+</div>
+
+<div id="projectDetails" class="page">
+<button class="back-btn" onclick="backToProjects()">← Back</button>
+<h2 id="detailTitle"></h2>
+<img id="detailImage" style="width:320px;border-radius:12px;margin:20px 0;">
+<p id="detailDesc"></p>
+<p id="detailFull"></p>
+<p id="detailDeadline"></p>
+<p id="detailExperience"></p>
+<p id="detailAge"></p>
+<p id="detailBudget"></p>
+<button class="apply-btn">Apply</button>
+</div>
+
+<script>
+function openLogin(){loginPopup.classList.remove("hidden")}
+function closeLogin(){loginPopup.classList.add("hidden")}
+function hideAll(){document.querySelectorAll(".container > div").forEach(el=>el.classList.add("hidden"))}
+function showTalentLogin(){hideAll();talentStep1.classList.remove("hidden")}
+function showTalentStep2(){hideAll();talentStep2.classList.remove("hidden")}
+function showBusinessLogin(){hideAll();businessStep1.classList.remove("hidden")}
+function showBusinessStep2(){hideAll();businessStep2.classList.remove("hidden")}
+
+function enterMarketplace(){
+closeLogin();
+homePage.style.display="none";
+marketplace.style.display="block";
+loadProjects();
+}
+
+function goHome(){
+marketplace.style.display="none";
+projectDetails.style.display="none";
+homePage.style.display="block";
+}
+
+function backToProjects(){
+projectDetails.style.display="none";
+marketplace.style.display="block";
+}
+
+const projects={
+"Design":[
+{
+title:"Logo Design for Startup",
+desc:"Create brand identity for food startup",
+details:"Brand: GreenBite. Colors: Green + White. Style: Minimal modern. Size: 1080x1080 PNG + Vector. Include leaf symbol.",
+deadline:"10 Days",
+experience:"Beginner–Intermediate",
+age:"16+",
+budget:"₹5000",
+img:"https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
+},
+{
+title:"Instagram Post Designer",
+desc:"Design 10 promotional posts",
+details:"Brand: UrbanWear. Colors: Black, White, Red. Size: 1080x1080. Include product highlight layout.",
+deadline:"7 Days",
+experience:"Beginner",
+age:"15+",
+budget:"₹3000",
+img:"https://images.unsplash.com/photo-1611162618071-b39a2ec055fb"
+}
+],
+
+"Programming":[
+{
+title:"Website Bug Fix",
+desc:"Fix frontend issues",
+details:"Fix navbar overlap, improve mobile layout, optimize loading speed.",
+deadline:"5 Days",
+experience:"Intermediate",
+age:"16+",
+budget:"₹4000",
+img:"https://images.unsplash.com/photo-1519389950473-47ba0277781c"
+},
+{
+title:"Mobile App Prototype",
+desc:"Build student learning app UI",
+details:"Screens: Login, Dashboard, Profile, Course View. Clean modern UI.",
+deadline:"12 Days",
+experience:"Intermediate",
+age:"17+",
+budget:"₹8000",
+img:"https://images.unsplash.com/photo-1551650975-87deedd944c3"
+}
+],
+
+"Marketing":[
+{
+title:"Social Media Manager",
+desc:"Manage startup Instagram",
+details:"1 reel + 2 posts daily. Reply to comments. Growth strategy.",
+deadline:"30 Days",
+experience:"Beginner",
+age:"16+",
+budget:"₹3500",
+img:"https://images.unsplash.com/photo-1557804506-669a67965ba0"
+},
+{
+title:"Content Writer",
+desc:"Write tech blog articles",
+details:"4 SEO articles. 800–1000 words. Topic: AI tools for students.",
+deadline:"8 Days",
+experience:"Beginner",
+age:"15+",
+budget:"₹2500",
+img:"https://images.unsplash.com/photo-1455390582262-044cdead277a"
+}
+]
+};
+
+function loadProjects(){
+let container=document.getElementById("projectsContainer");
+container.innerHTML="";
+for(let skill in projects){
+let group=document.createElement("div");
+group.className="project-group";
+group.innerHTML="<h3>"+skill+"</h3>";
+let grid=document.createElement("div");
+grid.className="project-grid";
+
+projects[skill].forEach(p=>{
+let card=document.createElement("div");
+card.className="project-card";
+card.innerHTML="<img src='"+p.img+"'><div><strong>"+p.title+"</strong><br>"+p.budget+"</div>";
+card.onclick=()=>showDetails(p);
+grid.appendChild(card);
+});
+
+group.appendChild(grid);
+container.appendChild(group);
+}
+}
+
+function showDetails(project){
+marketplace.style.display="none";
+projectDetails.style.display="block";
+detailTitle.innerText=project.title;
+detailDesc.innerText=project.desc;
+detailFull.innerText="Project Details: "+project.details;
+detailDeadline.innerText="Deadline: "+project.deadline;
+detailExperience.innerText="Experience Required: "+project.experience;
+detailAge.innerText="Minimum Age: "+project.age;
+detailBudget.innerText="Budget: "+project.budget;
+detailImage.src=project.img;
+}
+</script>
+
+</body>
+</html>
